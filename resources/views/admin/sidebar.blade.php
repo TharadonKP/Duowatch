@@ -8,7 +8,7 @@
             <ul class="nav" role="tablist">
                 <li role="presentation">
                     <a href="{{ url('/admin') }}">
-                        Dashboard
+                        Dashboard กกกก
                     </a>
                 </li>
             </ul>
