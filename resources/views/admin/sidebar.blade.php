@@ -19,6 +19,27 @@
                     </a>
                 </li>
             </ul>
+            <ul class="nav" role="tablist">
+                <li role="presentation">
+                    <a href="{{ url('/admin/bonus') }}">
+                        Bonus
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav" role="tablist">
+                <li role="presentation">
+                    <a href="{{ url('/admin/status') }}">
+                        Status
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav" role="tablist">
+                <li role="presentation">
+                    <a href="{{ url('/admin/usertype') }}">
+                        UserType
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
