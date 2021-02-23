@@ -21,5 +21,5 @@ Route::resource('admin/product-type', 'Admin\ProductTypeController');
 
 Route::resource('admin/bonus', 'Admin\BonusController');
 Route::resource('admin/status', 'Admin\StatusController');
-Route::resource('admin/user-type', 'Admin\UserTypeController');
+
 Route::resource('admin/user-type', 'Admin\UserTypeController');

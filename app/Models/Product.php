@@ -1,31 +1,28 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Product extends Model
 {
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'product';
+    protected $table = 'product'; 
 
-    /**
-    * The database primary key value.
-    *
-    * @var string
-    */
-    protected $primaryKey = 'product_id';
+    public static function index($query="",$product_type_id="")
+    {
+        $sql="SELECT * FROM product 
+              INNER JOIN producttype ON producttype.product_type_id=product.product_type_id
+              WHERE 1 ";
+        if($query!=""){
+            $sql.="AND product.product_name LIKE '%$query%' OR 
+                       producttype.product_type_name LIKE '%$query%' ";
+        }
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['product_id', 'product_name', 'price', 'amount', 'image', 'product_type_id'];
+        if($product_type_id!=""){            
+            $sql.="AND product.product_type_id=$product_type_id ";            
+        } 
 
-    
+        $sql.="ORDER BY product.product_id ASC ";
+         return DB::select($sql);
+    }  
 }

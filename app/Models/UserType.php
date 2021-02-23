@@ -11,7 +11,7 @@ class UserType extends Model
      *
      * @var string
      */
-    protected $table = 'user_type';
+    protected $table = 'usertype';
 
     /**
     * The database primary key value.
