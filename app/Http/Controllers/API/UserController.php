@@ -11,9 +11,9 @@ class UserController extends Controller
     {
         $username = $request->get('username');
         $password = $request->get('password');
-        $users = user::login($username,$password);
-        if($users){
-            $user = (array)$users;
+        $user = user::login($username,$password);
+        if($user){
+            $user = (array)$user;
             $user['message'] = 'success';
             $user['status'] = 'true';    
            // $user['token'] = sha1($username . $password . "@%#XYaU12$");        
@@ -46,7 +46,6 @@ class UserController extends Controller
         $user->frist_name = $request->get('frist_name');
         $user->last_name = $request->get('last_name');
         $user->phone_number = $request->get('phone_number');
-        $user->image = $image; 
         $user->user_type_id = 1;
         $user->save();                
         return response()->json(array(
