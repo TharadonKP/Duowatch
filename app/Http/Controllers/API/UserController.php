@@ -11,7 +11,8 @@ class UserController extends Controller
     {
         $username = $request->get('username');
         $password = $request->get('password');
-        $user = user::login($username,$password);
+        //error_log ($username);
+        $user = User::login($username,$password);
         if($user){
             $user = (array)$user;
             $user['message'] = 'success';
@@ -57,7 +58,8 @@ class UserController extends Controller
     public function view($id)
     {
         $sql="SELECT * FROM user WHERE user.user_id='$id'";
-        $user=DB::select($sql)[0];         
+        $user=DB::select($sql)[0];  
+        //$user=DB::select($sql); 
         return response()->json($user);
     }
 
