@@ -18,14 +18,14 @@ class Status extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'status_id';
+    protected $primaryKey = 'statusID';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['status_id', 'description'];
+    protected $fillable = ['statusID', 'description'];
 
     
 }

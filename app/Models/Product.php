@@ -8,21 +8,21 @@ class Product extends Model
 {
     protected $table = 'product'; 
 
-    public static function index($query="",$product_type_id="")
+    public static function index($query="",$productTypeID="")
     {
         $sql="SELECT * FROM product 
-              INNER JOIN producttype ON producttype.product_type_id=product.product_type_id
+              INNER JOIN producttype ON producttype.productTypeID=product.productTypeID
               WHERE 1 ";
         if($query!=""){
-            $sql.="AND product.product_name LIKE '%$query%' OR 
-                       producttype.product_type_name LIKE '%$query%' ";
+            $sql.="AND product.productName LIKE '%$query%' OR 
+                       producttype.productTypeName LIKE '%$query%' ";
         }
 
-        if($product_type_id!=""){            
-            $sql.="AND product.product_type_id=$product_type_id ";            
+        if($productTypeID!=""){            
+            $sql.="AND product.productTypeID=$productTypeID ";            
         } 
 
-        $sql.="ORDER BY product.product_id ASC ";
+        $sql.="ORDER BY product.productID ASC ";
          return DB::select($sql);
     }  
 }

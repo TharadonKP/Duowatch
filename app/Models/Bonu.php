@@ -18,14 +18,14 @@ class Bonu extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'bonus_id';
+    protected $primaryKey = 'bonusID';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['bonus_id', 'bonus_name', 'amount', 'image', 'price_condition_minimum', 'price_condition_maximum'];
+    protected $fillable = ['bonusID', 'bonusName', 'quantity', 'imageFileName', 'price_condition_minimum', 'price_condition_maximum'];
 
     
 }

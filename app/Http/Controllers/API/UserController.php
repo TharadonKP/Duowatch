@@ -30,13 +30,13 @@ class UserController extends Controller
     public function create(Request $request)
     {
         //validate file uploading,  where image works for jpeg, png, bmp, gif, or svg
-        $this->validate($request, ['file' => 'image']);
+        $this->validate($request, ['file' => 'imageFileName']);
 
         //upload file
         $imageFileName = "";        
         $file = $request->file('file');
         if(isset($file)){
-            $file->move('image',$file->getClientOriginalName());
+            $file->move('imageFileName',$file->getClientOriginalName());
             $imageFileName = $file->getClientOriginalName();
 
         }
@@ -44,10 +44,10 @@ class UserController extends Controller
         $user = new user();
         $user->username = $request->get('username');     
         $user->password = $request->get('password');
-        $user->frist_name = $request->get('frist_name');
-        $user->last_name = $request->get('last_name');
-        $user->phone_number = $request->get('phone_number');
-        $user->user_type_id = 1;
+        $user->firstName = $request->get('firstName');
+        $user->lastName = $request->get('lastName');
+        $user->phoneNumber = $request->get('phoneNumber');
+        $user->userTypeID = 1;
         $user->save();                
         return response()->json(array(
             'message' => 'add a user successfully', 
@@ -57,7 +57,7 @@ class UserController extends Controller
         
     public function view($id)
     {
-        $sql="SELECT * FROM user WHERE user.user_id='$id'";
+        $sql="SELECT * FROM user WHERE user.userID='$id'";
         $user=DB::select($sql)[0];  
         //$user=DB::select($sql); 
         return response()->json($user);
@@ -66,20 +66,20 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {       
         //validate file uploading,  where image works for jpeg, png, bmp, gif, or svg
-        $this->validate($request, ['file' => 'image']);
+        $this->validate($request, ['file' => 'imageFileName']);
 
         $user = user::find($id);
         $user->username = $request->get('username');     
         $user->password = $request->get('password');
-        $user->frist_name = $request->get('frist_name');
-        $user->last_name = $request->get('last_name');
-        $user->phone_number = $request->get('phone_number');   
-        $user->user_type_id = $request->get('user_type_id');
+        $user->firstName = $request->get('firstName');
+        $user->lastName = $request->get('lastName');
+        $user->phoneNumber = $request->get('phoneNumber');   
+        $user->userTypeID = $request->get('userTypeID');
 
         $file = $request->file('file');
         if(isset($file)){
-            $file->move('image',$file->getClientOriginalName());
-            $user->image = $file->getClientOriginalName();
+            $file->move('imageFileName',$file->getClientOriginalName());
+            $user->imageFileName = $file->getClientOriginalName();
         }        
 
         $user->save();

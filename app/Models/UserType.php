@@ -18,14 +18,14 @@ class UserType extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'user_type_id';
+    protected $primaryKey = 'userTypeID';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['user_type_id', 'user_type_name'];
+    protected $fillable = ['userTypeID', 'userTypeName'];
 
     
 }

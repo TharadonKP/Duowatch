@@ -18,14 +18,14 @@ class user extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'userID';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'username', 'password', 'first_name','last_name', 'phone_number','user_type_id'];
+    protected $fillable = ['userID', 'username', 'password', 'firstName','lastName', 'phoneNumber','userTypeID'];
 
     public static function login($username,$password)
     {

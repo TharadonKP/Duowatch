@@ -10,9 +10,9 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $user_id = $request->get('user_id');
-        $status_id = $request->get('status_id');
-        $orders = Orders::index($search,$user_id,$status_id);
+        $userID = $request->get('userID');
+        $status_id = $request->get('statusID');
+        $orders = Orders::index($search,$userID,$statusID);
         return response()->json( $orders );
     }
 }

@@ -13,8 +13,8 @@ class ProductController extends Controller
         error_log($request);
 
         error_log($search);
-        $product_type_id = $request->get('product_type_id');        
-        $data = Product::index($search,$product_type_id);
+        $productTypeID = $request->get('productTypeID');        
+        $data = Product::index($search,$productTypeID);
         
         return response()->json($data);
     }

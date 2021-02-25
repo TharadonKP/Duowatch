@@ -18,14 +18,14 @@ class ProductType extends Model
     *
     * @var string
     */
-    protected $primaryKey = 'product_type_id';
+    protected $primaryKey = 'productTypeID';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['product_type_id', 'product_type_name'];
+    protected $fillable = ['productTypeID', 'productTypeName'];
 
     
 }
