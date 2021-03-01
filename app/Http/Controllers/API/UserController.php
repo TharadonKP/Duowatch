@@ -1,0 +1,108 @@
+<?php
+namespace App\Http\Controllers\API;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\user;
+use DB;
+
+class UserController extends Controller
+{
+    public function login(Request $request)
+    {
+        $username = $request->get('username');
+        $password = $request->get('password');
+        //error_log ($username);
+        $user = User::login($username,$password);
+        if($user){
+            $user = (array)$user;
+            $user['message'] = 'success';
+            $user['status'] = 'true';    
+           // $user['token'] = sha1($username . $password . "@%#XYaU12$");        
+        }else{
+            $user = array(
+                'message' => 'this user is not found', 
+                'status' => 'false');
+        }
+
+        return response()->json($user);
+    }
+
+    public function create(Request $request)
+    {
+        //validate file uploading,  where image works for jpeg, png, bmp, gif, or svg
+        $this->validate($request, ['file' => 'imageFileName']);
+
+        //upload file
+        $imageFileName = "";        
+        $file = $request->file('file');
+        if(isset($file)){
+            $file->move('imageFileName',$file->getClientOriginalName());
+            $imageFileName = $file->getClientOriginalName();
+
+        }
+    
+        $user = new user();
+        $user->username = $request->get('username');     
+        $user->password = $request->get('password');
+        $user->firstName = $request->get('firstName');
+        $user->lastName = $request->get('lastName');
+        $user->phoneNumber = $request->get('phoneNumber');
+        $user->email = $request->get('email'); 
+        $user->userTypeID = 3;
+        $user->save();                
+        return response()->json(array(
+            'message' => 'add a user successfully', 
+            'status' => 'true'));  
+
+    }
+        
+    public function view($id)
+    {
+        $sql="SELECT * FROM user WHERE user.userID='$id'";
+        $user=DB::select($sql)[0];  
+        //$user=DB::select($sql); 
+        return response()->json($user);
+    }
+
+    public function update(Request $request, $id)
+    {       
+        //validate file uploading,  where image works for jpeg, png, bmp, gif, or svg
+        $this->validate($request, ['file' => 'imageFileName']);
+
+        $user = user::find($id);
+        //$user->username = $request->get('username');     
+        $user->password = $request->get('password');
+        $user->firstName = $request->get('firstName');
+        $user->lastName = $request->get('lastName');
+        $user->phoneNumber = $request->get('phoneNumber');   
+        $user->email = $request->get('email'); 
+        $user->userTypeID = $request->get('userTypeID');
+
+        $file = $request->file('file');
+        if(isset($file)){
+            $file->move('imageFileName',$file->getClientOriginalName());
+            $user->imageFileName = $file->getClientOriginalName();
+        }        
+
+        $user->save();
+
+        return response()->json(array(
+            'message' => 'update a user successfully', 
+            'status' => 'true'));
+    }
+
+    public function delete($id)
+    {
+        //hard delete
+        $user = User::find($id);
+        $user->delete();
+
+        //soft delete
+        $user = User::find($id); 
+        $user->save();      
+   
+        return response()->json(array(
+            'message' => 'delete a user successfully', 
+            'status' => 'true'));
+    }            
+}
